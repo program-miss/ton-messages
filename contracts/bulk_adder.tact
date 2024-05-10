@@ -21,10 +21,9 @@ contract BulkAdder with Deployable {
         // require(msg.target <= 10, "target can't be more than 10");
 
         // 2 способ:
-        // if (msg.target > 10) {
-        //     throw(123);
-        // }
-
+        if (msg.target > 10) {
+            throw(123);
+        }
         self.target = msg.target; // 5
         send(SendParameters{
                 to: msg.counter,

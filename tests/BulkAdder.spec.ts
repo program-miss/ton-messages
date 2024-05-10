@@ -63,11 +63,11 @@ describe('BulkAdder and Counter', () => {
     it('should increase to target', async () => {
         // 30n - ошибка (из-за кол-ва газа 0.2)
         // газа 0.2 хватает только на 11n (11 полных циклов)
-        const target = 30n;
+        const target = 5n;
         const res = await bulkAdder.send(
             deployer.getSender(),
             {
-                value: toNano('0.6'),
+                value: toNano('0.2'),
             },
             {
                 target,
@@ -75,12 +75,8 @@ describe('BulkAdder and Counter', () => {
                 counter: counter.address,
             },
         );
-        console.log('res', res);
 
         const count = await counter.getCounter();
         expect(count).toEqual(target);
-
-        console.log('count', count);
-        console.log('events.amount', res.events.length);
     });
 });
